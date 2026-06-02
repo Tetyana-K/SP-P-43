@@ -33,7 +33,8 @@ static extern bool SetWindowText(IntPtr hWnd, string lpString);
 //Знайти вікно за класом вікна або заголовком
 //IntPtr hWnd = FindWindow(null, "Калькулятор"); // шукати вікно за заголовком "Калькулятор" (можна використовувати частину заголовка, якщо він унікальний)
 //IntPtr hWnd = FindWindow("Windows.UI.Core.CoreWindow", null); // Windows.UI.Core.CoreWindow - клас вікна для багатьох сучасних додатків Windows (UWP)
-IntPtr hWnd = FindWindow("Notepad", null); // "Notepad"  - клас вікна
+//IntPtr hWnd = FindWindow("Notepad", null); // "Notepad"  - клас вікна
+IntPtr hWnd = FindWindow(null, "Form1"); // "Notepad"  - клас вікна
 //IntPtr hWnd = FindWindow(null, "Безымянный – Блокнот"); // "Notepad"  - клас вікна
 
 
