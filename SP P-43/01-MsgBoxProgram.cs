@@ -16,13 +16,16 @@ class Program
     [DllImport("user32.dll", CharSet = CharSet.Unicode)]
     public static extern int MessageBox(IntPtr hWnd, string text, string caption, uint type);
 
+    // Імпорт функції Beep із kernel32.dll
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
     public static extern bool Beep(uint freq, uint duration);
     static void Main()
     {
         // Виклик MessageBox
+        // IntPtr.Zero - вказує, що вікно не має батьківського вікна (NULL)
         MessageBox(IntPtr.Zero, "Hello, P/Invoke!\nHello from Windows API\n", "P/Invoke Example", 0x00000001);// 0); // 0x00000001 - кнопки Ok-Cancel
-        if (Beep(750, 300))
+        
+        if (Beep(750, 300)) // 750 Hz, 300 ms
         {
             MessageBox(IntPtr.Zero, "Beep was successful", "P/Invoke Example", 0);
         }

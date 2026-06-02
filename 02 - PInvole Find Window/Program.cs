@@ -31,8 +31,8 @@ if (hwnd != IntPtr.Zero)
     System.Threading.Thread.Sleep(3000);
 
     Console.WriteLine("Пишемо текст у вікно...");
-     app.WriteTextToNotepad("Привіт з C# !!!");
-    System.Threading.Thread.Sleep(3000);
+    app.WriteTextToNotepad("Привіт з C# !!!");
+    System.Threading.Thread.Sleep(7000);
     
     Console.WriteLine("Закриваємо вікно...");
     app.CloseWindow(hwnd);
