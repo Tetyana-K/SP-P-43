@@ -98,7 +98,7 @@ void PrintProcessInfo(Process process)
 
     // Час, витрачений  на користувацький код
     Console.WriteLine($"User Processor Time: {process.UserProcessorTime}");
-    Console.WriteLine($"PrivateMemorySize (KB): {process.PrivateMemorySize64 / 1024} KB");
+    Console.WriteLine($"PrivateMemorySize (KB): {process.PrivateMemorySize64 / 1024.0} KB");
     Console.WriteLine(new string('-', 40));
 }
 void PrintProcessInfoDetail(Process process)
@@ -123,14 +123,14 @@ void PrintProcessInfoDetail(Process process)
 
     // кількість пам'яті, яку процес використовує в даний момент (включає спільну пам'ять)
     // Кількість пам'яті процесу, яка зараз знаходиться у фізичній RAM.
-    Console.WriteLine($"Working Set (KB): {process.WorkingSet64 / 1024} KB");
+    Console.WriteLine($"Working Set (KB): {process.WorkingSet64 / 1024.0} KB");
 
     // Обсяг пам'яті, який може бути вивантажений у файл підкачки
-    Console.WriteLine($"Paged Memory: {process.PagedMemorySize64 / 1024} KB");
+    Console.WriteLine($"Paged Memory: {process.PagedMemorySize64 / 1024.0} KB");
 
     // Сюди входить:     RAM,   файл підкачки.    зарезервовані області.
     //Часто значно більше за реальне використання пам'яті.
-    Console.WriteLine($"Virtual Memory Size (KB): {process.VirtualMemorySize64 / 1024} KB");
+    Console.WriteLine($"Virtual Memory Size (KB): {process.VirtualMemorySize64 / 1024.0} KB");
     Console.WriteLine(new string('-', 40));
 
 }

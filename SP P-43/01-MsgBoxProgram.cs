@@ -33,5 +33,15 @@ class Program
         {
             MessageBox(IntPtr.Zero, "Beep failed", "P/Invoke Example", 0);
         }
+
+        int result = MessageBox(IntPtr.Zero, "Are you here", "Question", 2);
+        if (result == 1) // IDOK
+        {
+            MessageBox(IntPtr.Zero, "You clicked OK", "Result", 0);
+        }
+        else if (result == 2) // IDCANCEL
+        {
+            MessageBox(IntPtr.Zero, "You clicked Cancel", "Result", 0);
+        }
     }
 }
