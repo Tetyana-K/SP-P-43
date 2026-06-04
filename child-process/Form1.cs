@@ -17,13 +17,13 @@ namespace child_process
             {
                 label1.Text = $"Не отримали параметри";
                 label1.ForeColor = Color.Red;
-                listBox1.Visible = false;
+                listBox1.Visible = false; // ховаємо ListBox, якщо немає параметрів для відображення
             }
             else
             {
                 label1.Text = $"Отримали параметри";
                 label1.ForeColor = Color.Green;
-                foreach (var arg in args)
+                foreach (var arg in args)  // проходимо по кожному аргументу та додаємо його до ListBox для відображення
                 {
                     listBox1.Items.Add(arg);
                 }

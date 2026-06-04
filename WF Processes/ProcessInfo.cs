@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WF_Processes
 {
-    internal class ProcessInfo
+    internal class ProcessInfo // клас для зберігання інформації про процес (модель даних для відображення у UI - формі)
     {
         public int Id { get; set; }
         public string Name { get; set; }

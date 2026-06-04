@@ -12,17 +12,17 @@ using System.Diagnostics;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 try
 {
-    RunNotepad(); // Запускаємо процес блокнота
+    //RunNotepad(); // Запускаємо процес блокнота
 
     //RunCalc();
 
     //RunBrowser();
-    //RunBrowserWithUrl("https://msdn.com");
+   // RunBrowserWithUrl("https://msdn.com");
     
-    //OpenResource("https://w3schools.com"); // Відкриваємо веб-сайт у браузері за замовчуванням
+   // OpenResource("https://w3schools.com"); // Відкриваємо веб-сайт у браузері за замовчуванням
     //OpenResource("my.txt"); // Відкриваємо файл у застосунку  за замовчуванням, тобто у Блокноті (якщо це текстовий файл)
-    //OpenResource("C:\\Users\\Ryzen\\source\\repos\\SP P-43\\02-Create process\\02-start and kill process.cs"); // Відкриваємо веб-сайт у браузері за замовчуванням)
-    //KillProcess("notepad"); // Завершуємо всі процеси з назвою "notepad" (можна використовувати іншу назву процесу, наприклад "calc" для калькулятора)
+    //OpenResource("C:\\Users\\Ryzen\\source\\repos\\SP P-43\\02-Create process\\02-start and kill process.cs"); // 
+    KillProcess("notepad"); // Завершуємо всі процеси з назвою "notepad" (можна використовувати іншу назву процесу, наприклад "calc" для калькулятора)
 
 }
 catch (Exception ex)
@@ -39,11 +39,13 @@ void RunNotepad()
         Console.WriteLine($"Назва процесу: {notepad.ProcessName}");
         Console.WriteLine($"Кількість потоків: {notepad.Threads.Count}");
         notepad.PriorityClass = ProcessPriorityClass.High; // Встановлюємо базовий пріоритет процесу (можливі значення від 0 до 31, де 0 - найнижчий пріоритет, а 31 - найвищий)
+        
         notepad.WaitForInputIdle(); // Чекаємо, поки блокнот буде готовий до взаємодії (завантажиться і відобразиться вікно)
-        notepad.WaitForExit(); // Чекаємо
+        
+        notepad.WaitForExit(); // Чекаємо завершення процесу (тобто поки користувач не закриє блокнот)
         Console.WriteLine($"Блокнот закрито. Exit code {notepad.ExitCode}");
     }
-    catch (Exception ex)
+    catch (Exception ex) // може виникнути, якщо не вдається запустити процес (наприклад, якщо файл не знайдено або у нас недостатньо прав для запуску процесу)
     {
         Console.WriteLine($"Помилка при запуску процесу: {ex.Message}");
     }
@@ -89,7 +91,7 @@ static void OpenResource(string path)
             FileName = path,
             UseShellExecute = true // Вказуємо, що потрібно використовувати оболонку для запуску процесу
         });
-        Console.WriteLine($"Ресурс {path} відкрито у програмі  за замовчуванням.");
+        Console.WriteLine($"Ресурс {path} відкрито у програмі за замовчуванням.");
     }
     catch (Exception ex)
     {

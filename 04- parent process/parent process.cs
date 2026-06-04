@@ -11,7 +11,8 @@ string pathChild = "C:\\Users\\Ryzen\\source\\repos\\SP P-43\\child-process\\bin
 //        UseShellExecute = false
 //    });
 
-Process process = Process.Start(pathChild, "ONE TWO THREE 4");
-Console.WriteLine($"Process started with PID: {process.Id}  ");
+Process process = Process.Start(pathChild, "ONE TWO THREE FOUR 555"); // запускаємо дочірній процес, передаючи йому аргументи командного рядка (рядок "ONE TWO THREE FOUR 555"),
+                                                                      // які будуть доступні в дочірньому процесі через масив args у методі Main
+Console.WriteLine($"Child process started with PID: {process.Id}  ");
 process.WaitForExit();
 Console.WriteLine($"Child process closed");

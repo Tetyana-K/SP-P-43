@@ -9,7 +9,7 @@ namespace WF_Processes
             InitializeComponent();
         }
 
-        List<ProcessInfo> processes = new();
+        List<ProcessInfo> processes = new(); // список для зберігання інформації про процеси, який буде відображатися у DataGridView
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadProcesses();
@@ -18,11 +18,11 @@ namespace WF_Processes
         {
             processes = new List<ProcessInfo>();
 
-            foreach (var p in Process.GetProcesses())
+            foreach (var p in Process.GetProcesses()) // отримуємо всі запущені процеси
             {
                 try
                 {
-                    processes.Add(new ProcessInfo
+                    processes.Add(new ProcessInfo // створюємо об'єкт нашого типу ProcessInfo для кожного процесу та додаємо його до списку
                     {
                         Id = p.Id,
                         Name = p.ProcessName,
@@ -42,7 +42,7 @@ namespace WF_Processes
         }
         private string GetPriority(Process p)
         {
-            try
+            try // намагаємося отримати пріоритет процесу, але це може викликати виняток, якщо процес завершився або у нас недостатньо прав для доступу до його інформації
             {
                 return p.PriorityClass.ToString();
             }
@@ -60,7 +60,6 @@ namespace WF_Processes
             process = Process.Start("mspaint.exe"); // запускаємо процес "Paint"
             PID = process.Id;
             processName = process.ProcessName;
-
 
         }
 
