@@ -1,15 +1,28 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Diagnostics;
+/*
+ Процесами можна керувати шляхом їх створення, завершення, зміни пріоритету,  очікування завершення. 
+Один процес може породжувати інші процеси за допомогою системних викликів.
 
+Батьківський процес може отримувати інформацію про дочірній процес, чекати його завершення та завершувати його.
+Дочірні процеси створюються для паралельного виконання, ізоляції задач, підвищення надійності та запуску зовнішніх програм.
+
+ */
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 try
 {
-    //RunNotepad(); // Запускаємо процес блокнота
+    RunNotepad(); // Запускаємо процес блокнота
 
     //RunCalc();
 
-//    RunBrowser();
-KillProcess("notepad"); // Завершуємо всі процеси з назвою "notepad" (можна використовувати іншу назву процесу, наприклад "calc" для калькулятора)
+    //RunBrowser();
+    //RunBrowserWithUrl("https://msdn.com");
+    
+    //OpenResource("https://w3schools.com"); // Відкриваємо веб-сайт у браузері за замовчуванням
+    //OpenResource("my.txt"); // Відкриваємо файл у застосунку  за замовчуванням, тобто у Блокноті (якщо це текстовий файл)
+    //OpenResource("C:\\Users\\Ryzen\\source\\repos\\SP P-43\\02-Create process\\02-start and kill process.cs"); // Відкриваємо веб-сайт у браузері за замовчуванням)
+    //KillProcess("notepad"); // Завершуємо всі процеси з назвою "notepad" (можна використовувати іншу назву процесу, наприклад "calc" для калькулятора)
 
 }
 catch (Exception ex)
@@ -51,11 +64,41 @@ static void RunCalc()
 
 static void RunBrowser()
 {
-    Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"); // Запускаємо процес Google Chrome
-
-    // Запускаємо процес Google Chrome з аргументом (відкриваємо сайт www.msdn.com)
+    var process = Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"); // Запускаємо процес Google Chrome
     //Process.Start(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe", "www.msdn.com"); 
+
 }
+static void RunBrowserWithUrl(string url)
+{
+    // ProcessStartInfo - це клас, який дозволяє налаштувати параметри запуску процесу, такі як ім'я файлу, аргументи, робочий каталог та інші.
+    Process.Start(new ProcessStartInfo
+    {
+        FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+        Arguments = url,
+        UseShellExecute = true // Вказуємо, що потрібно використовувати оболонку для запуску процесу
+                               // = Запускати програму через Windows (оболонку), як ніби ми двічі клікнули по файлу
+    });
+}
+
+static void OpenResource(string path)
+{
+    try
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = path,
+            UseShellExecute = true // Вказуємо, що потрібно використовувати оболонку для запуску процесу
+        });
+        Console.WriteLine($"Ресурс {path} відкрито у програмі  за замовчуванням.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Помилка при відкритті ресурсу {path}: {ex.Message}");
+    }
+}
+// UseShellExecute = true -    Windows вирішує, як запускати
+// UseShellExecute = false -   .NET напряму запускає exe
+
 static void KillProcess(string processName)
 {
     var processes = Process.GetProcessesByName(processName); // Отримуємо всі процеси з вказаною назвою (наприклад, "notepad" для блокнота)

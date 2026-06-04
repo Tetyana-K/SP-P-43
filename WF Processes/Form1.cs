@@ -12,7 +12,7 @@ namespace WF_Processes
         List<ProcessInfo> processes = new();
         private void Form1_Load(object sender, EventArgs e)
         {
-           LoadProcesses();
+            LoadProcesses();
         }
         private void LoadProcesses()
         {
@@ -31,7 +31,7 @@ namespace WF_Processes
                         Priority = GetPriority(p)
                     });
                 }
-                catch 
+                catch
                 {
                     // деякі процеси недоступні — просто пропускаємо
                 }
@@ -42,7 +42,7 @@ namespace WF_Processes
         }
         private string GetPriority(Process p)
         {
-            try 
+            try
             {
                 return p.PriorityClass.ToString();
             }
@@ -51,5 +51,55 @@ namespace WF_Processes
                 return "N/A";
             }
         }
+
+        Process process;
+        int PID;
+        string processName;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            process = Process.Start("mspaint.exe"); // запускаємо процес "Paint"
+            PID = process.Id;
+            processName = process.ProcessName;
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!process.CloseMainWindow())
+            {
+                MessageBox.Show("Процес не має головного вікна або вже завершений.");
+                return;
+            }
+            if(process.WaitForExit(10000)) {
+                MessageBox.Show($"Процес {processName} (PID: {PID}) успішно закрито.");
+            }
+             else
+            {
+                MessageBox.Show($"Процес {process.ProcessName} (PID: {PID}  не відповідає на запит закриття. Спроба примусового завершення...");
+                TryKillProcess(process);
+            }
+        }
+
+        private void TryKillProcess(Process process)
+        {
+            if (process == null || process.HasExited)
+            {
+                MessageBox.Show("Процес не існує чи завершено");
+                return;
+            }
+            try
+            {
+                process.Kill();
+                process.WaitForExit();
+                MessageBox.Show($"Процес {process.ProcessName} (PID: {process.Id}) примусово завершено.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при завершенні процесу: {ex.Message}");
+            }
+        }
     }
 }
+
+
