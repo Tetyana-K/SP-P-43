@@ -13,6 +13,7 @@ namespace WF_Processes
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadProcesses();
+            
         }
         private void LoadProcesses()
         {
