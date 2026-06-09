@@ -19,7 +19,10 @@ for (int i = 0; i < numThreads; i++)
         localEnd = endLetter;
     }
     Console.WriteLine($"Start letter {localStart}, End letter {localEnd} for thread #{i}");
-    threads[i] = new Thread(() => PrintLetters(localStart, localEnd)); // використання лямбда-виразу для передачі параметрів у потік
+    threads[i] = new Thread(
+        () => PrintLetters(localStart, localEnd)
+        ); // використання лямбда-виразу для передачі параметрів у потік
+    
     startLetter = (char)(localEnd + 1); // оновлення початкової букви для наступного потоку
 }
 

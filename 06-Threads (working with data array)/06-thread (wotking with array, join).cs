@@ -2,7 +2,7 @@
 
 Console.Write("Input size of array: ");
 int size = int.Parse(Console.ReadLine()!);
-int[] arr = Enumerable.Range(1, size).ToArray();
+int[] arr = Enumerable.Range(1, size).ToArray(); // створення масиву з числами від 1 до size
 Console.WriteLine(String.Join(", ", arr));
 
 int sum =0; // Змінна для збереження суми, буде використовуватися в одному з потоків
@@ -15,9 +15,10 @@ Thread productThread = new Thread(() => ProductArray(arr)); //
 sumThread.Start(); // Запуск потока для обчислення суми
 productThread.Start(); // Запуск потока для обчислення добутку
 
+
 // Чекаємо завершення обох потоків
-sumThread.Join();
-productThread.Join();
+sumThread.Join();  // Чекаємо завершення потока для обчислення суми
+productThread.Join(); // Чекаємо завершення потока для обчислення добутку
 
 // Виводимо результати
 Console.WriteLine("_________________________");
@@ -32,7 +33,7 @@ void SumArray(int[] arr)
     foreach (int num in arr)
     {
         sum += num;
-        Console.WriteLine($"Sum + {num}");
+        Console.WriteLine($"Sum + {num} = {sum}");
 
         Thread.Sleep(50); // Затримка для наочності
     }
@@ -45,8 +46,8 @@ void ProductArray(int[] arr)
     foreach (int num in arr)
     {
         product *= num;
-        Console.WriteLine($"Product * {num}");
-        Thread.Sleep(50); // Затримка для наочності
+        Console.WriteLine($"Product * {num} = {product}");
+        Thread.Sleep(70); // Затримка для наочності
     }
     //Console.WriteLine($"Product = {product}");
 

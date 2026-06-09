@@ -1,9 +1,11 @@
-﻿// ParameterizedThreadStart - делегат, який дозволяє передавати параметр у потік,  delegate void ParameterizedThreadStart(object? obj)
+﻿// ParameterizedThreadStart - делегат, який дозволяє передавати параметр у потік,
+// delegate void ParameterizedThreadStart(object? obj)
 
 ParameterizedThreadStart threadStart = new ParameterizedThreadStart(PrintLetters); // створення делегата, який посилається на метод PrintLetters, який приймає параметр
 Thread thread = new Thread(threadStart); // створення нового потоку, який виконує метод PrintLetters
 thread.Name = "thread 1"; // встановлення імені потока для зручності відладки
-thread.Start('O');
+thread.Start('O'); // при запуску потока ми передаємо символ 'O' як параметр,
+                   // який буде доступний у методі PrintLetters через параметр 'end'
 
 int left = 1, right = 50;
 // створення нового потоку, який виконує анонімну функцію (лямбда-вираз), яка виводить числа від left до right,
@@ -27,12 +29,14 @@ thread2.Start(); // запуск потока thread2, який виконує �
 // у цьому методі ми перетворюємо його на char: (char)end, бо приходить символ, запакований як object
 void PrintLetters(object ? end)
 {
-    for (char c = 'A'; c <= (char)end; c++)
+    if(end == null) 
+        end = 'Z'; // якщо параметр не передано, встановлюємо його значення за замовчуванням
+    for (char c = 'A'; c <= (char) end; c++)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"\t\t\t{c} in {Thread.CurrentThread.Name}");
         Console.ResetColor();
-        Thread.Sleep(100); //затримка вторинного потоку на 100 мс для наочності
+        Thread.Sleep(150); //затримка вторинного потоку на 100 мс для наочності
     }
 }
 
