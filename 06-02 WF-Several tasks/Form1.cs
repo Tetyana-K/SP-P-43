@@ -13,13 +13,14 @@ namespace _06_02_WF_Several_tasks
         {
             MessageBox.Show("Start");
             string text = richTextBox1.Text;
-            string[] currentLines = richTextBox1.Lines;
+            string[] currentLines = richTextBox1.Lines; // дістали текст розбтий на рядки
 
+            //Task<int> taskLen = Task.Run(() => richTextBox1.Text.Length);// поганий спосіб = змішали доступ до UI та  Task
             Task<int> taskLen = Task.Run(() => text.Length);// Завдання для показу довжини рядка
             Task<int> taskWordCount = Task.Run(() => CountWords(text)); // Завдання для підрахунку слів
             Task<int> taskLines = Task.Run(() => currentLines.Length);// text.Split("\n").Length);// // Завдання для підрахунку  числа рядків
 
-            await Task.WhenAll(taskLen, taskWordCount, taskLines); // Очікуємо завершення усіх завдань
+            await Task.WhenAll(taskLen, taskWordCount, taskLines); // Очікуємо завершення усіх завдань, головний потік UI не блокується
 
             textBox1.Text = $"Length: {taskLen.Result}\r\nWord count: {taskWordCount.Result}";
             textBox1.AppendText($"\r\nLines: {taskLines.Result}\r\n");

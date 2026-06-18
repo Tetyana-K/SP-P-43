@@ -17,10 +17,10 @@
 // Примітка: Використовується рідко, коли треба розділити створення і старт.
 
 // Приклад використання різних способів запуску завдань (Task) в C#
-Task task1 = new Task(PrintHelloAsync); // створюємо завдання, яке виконає метод PrintHello
+Task task1 = new Task(PrintHello); // створюємо завдання, яке виконає метод PrintHello
 task1.Start(); // запускаємо завдання
 
-//task1.Wait(); // чекаємо завершення першого завдання, блокуючи потік
+task1.Wait(); // чекаємо завершення першого завдання, блокуючи потік
 
 // СПОСІБ 2: Створення і запуск Task через Task.Run (Сучасний стандарт)
 // Найкращий вибір для важких обчислень у фоні
@@ -52,13 +52,18 @@ await Task.WhenAll(task2, task3);
 // РОБОТА З РЕЗУЛЬТАТОМ (Task<T>)
 
 Task<int> task4 = Task.Run(() => Sum(5, 10)); // створюємо і запускаємо завдання, яке виконає метод Sum з параметрами
+
 int result = await task4; // очікуємо завершення завдання і отримуємо результат
 Console.WriteLine($"Sum = {result}");
 
 int result2 = await Task.Run(() => Sum(20, 30)); // створюємо і запускаємо завдання, яке виконає метод Sum з параметрами, очікуємо його завершення і отримуємо результат
 Console.WriteLine($"Sum (20, 30) = {result2}");
+
+Console.WriteLine("Main thread is working...");
+
+
 int Sum(int a, int b) => a + b; // Локальна функція для підрахунку суми двох чисел 
-void PrintHelloAsync()
+void PrintHello()
 {
     for (int i = 0; i < 5; i++)
     {
@@ -67,7 +72,7 @@ void PrintHelloAsync()
     }
 }
 
-async Task PrintByeAsync()
+async Task PrintByeAsync() // функція повертає Task, ніби void
 {
     for (int i = 0; i < 5; i++)
     {

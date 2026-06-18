@@ -1,6 +1,5 @@
 ﻿double[] arr = new double[] { 1, 2, 3.5, 4, 5, 6, 7, 8, 9 };
 
-
 Task<double>[] tasks = new Task<double>[2];
 tasks[0] = Task.Run(() => Sum(arr));
 tasks[1] = Task.Run(() => Product(arr));

@@ -64,6 +64,7 @@ Task task = Task.Run(() => // запускаємо завдання, у вигл
     Console.WriteLine("Роботу завершено");
 });
 
+Console.WriteLine($"Task Status : {task.Status}");
 task.Wait(); // чекаємо завершення, блокує основний потік
 
 Console.WriteLine("Головний потік продовжив роботу");

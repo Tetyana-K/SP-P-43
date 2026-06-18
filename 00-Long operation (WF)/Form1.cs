@@ -9,10 +9,11 @@ namespace _00_Long_operation__WF_
             progressBar1.Maximum = upLimit;
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private /*async*/ void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Long operation!!!");
-            await LongOperation();
+            //await 
+                LongOperation();
         }
         //private void LongOperation()
         //{
@@ -32,7 +33,7 @@ namespace _00_Long_operation__WF_
             {
                 result = i * i;
                 progressBar1.Value++;
-                //await Task.Delay(10); //  імітація довгої роботи  ( без блокування потоку), кажемо - я зараз чекаю - можеш зайнтися іншими справами
+                await Task.Delay(10); //  імітація довгої роботи  ( без блокування потоку), кажемо - я зараз чекаю - можеш зайнтися іншими справами
             }
             MessageBox.Show("Completed!");
         }

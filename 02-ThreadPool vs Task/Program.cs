@@ -79,7 +79,8 @@ for (int i = 0; i < tasks.Length; i++)
     });
 }
 
-Task.WaitAll(tasks); // чекаємо завершення усіх завдань, потік блокується
+//Task.WaitAll(tasks); // чекаємо завершення усіх завдань, потік блокується
+Task.WaitAll(tasks[0], tasks[1]);
 
 Console.WriteLine("Усі Task завершені");
 

@@ -8,7 +8,7 @@
 */
 class Program
 {
-    static async Task Main()
+    static async Task Main() // якщо Main використовує await - то вона має бути async
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -23,6 +23,8 @@ class Program
         {
             Console.WriteLine($"Main() робить щось {i}");
             await Task.Delay(500); // імітація роботи
+            //Thread.Sleep(500);
+
         }
         // Очікуємо завершення задачі
         int result = await task; //забираємо результат у змінну result
@@ -33,6 +35,7 @@ class Program
     {
         Console.WriteLine($"Обчислення {x} * {x}...");
         Task.Delay(2000).Wait(); // імітація довгої операції
+        //Thread.Sleep(500);
         return x * x;
     }
 }

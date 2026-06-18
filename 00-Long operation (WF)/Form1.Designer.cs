@@ -44,7 +44,7 @@
             // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(27, 151);
+            progressBar1.Location = new Point(27, 150);
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(533, 50);
             progressBar1.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(572, 290);
+            ClientSize = new Size(592, 290);
             Controls.Add(progressBar1);
             Controls.Add(button1);
             Name = "Form1";
